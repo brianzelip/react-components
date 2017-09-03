@@ -31,14 +31,20 @@
         return `rgb(${randomPx()}, ${randomPx()}, ${randomPx()})`;
       };
 
+      function RandomColorText(props) {
+        console.log(`RandomColorText() logging props:`, props);
+        return <p className="mx-auto h1 white">{props.color}, {props.hello}</p> 
+      };
+
       function RandomFullBleedBackgroundColor() {
-        var styles = {'backgroundColor':`${newRGB()}`};
+        const color = newRGB();
+        var styles = {'backgroundColor':color};
         return (
           <div style={styles} className="vh100 flex flex-center">
-            <p className="mx-auto h1 white">{styles.backgroundColor}</p>
+            <RandomColorText color={color} hello='hello Mate!'/>
           </div>
         );
-      }
+      };
 
       function mutate() {
         ReactDOM.render(
