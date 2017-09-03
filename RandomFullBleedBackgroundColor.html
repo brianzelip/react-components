@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>&lt;RandomFullBleedBackgroundColor /&gt;</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="https://npmcdn.com/basscss@7.1.1/css/basscss.min.css">
+    <style>
+      html,
+      body,
+      .vh100 { min-height: 100vh; }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      function newRGB() {
+        function randomPx() {
+          let [min, max] = [0, 256];
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
+        return `rgb(${randomPx()}, ${randomPx()}, ${randomPx()})`;
+      };
+
+      function RandomFullBleedBackgroundColor() {
+        var styles = {'backgroundColor':`${newRGB()}`};
+        return (
+          <div style={styles} className="vh100 flex flex-center">
+            <p className="mx-auto h1 white">{styles.backgroundColor}</p>
+          </div>
+        );
+      }
+
+      function mutate() {
+        ReactDOM.render(
+          <RandomFullBleedBackgroundColor />,
+          document.getElementById('root')
+        );
+        return undefined;
+      }
+
+      setInterval(mutate, 1000);
+
+    </script>
+
+  </body>
+
+  <!-- 
+      REFERENCES:
+        React docs:
+          - https://facebook.github.io/react/docs/introducing-jsx.html
+          - https://facebook.github.io/react/docs/rendering-elements.html
+          - https://facebook.github.io/react/docs/components-and-props.html
+          - https://www.reactenlightenment.com/react-jsx/5.7.html
+        
+        Random pixel int:
+          - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values
+
+   -->
+
+</html>
